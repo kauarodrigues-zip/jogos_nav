@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sobre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-    
+    <div id="menu-placeholder"></div>
+  <script>
+	fetch('menu.html')
+		.then( r => r.ok ? r.text() : Promise.reject(r.statusText))
+		.then(html => {
+			document.getElementById('menu-placeholder').innerHTML = html;
+			})
+			.catch(err => console.error('erro ao carregar o menu', err));
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <h1>O Site trata-se de uma atividade da Disciplina de Front-end Frameworks do Curso de Análise e Desenvolvimento de Sistemas da Unama Santarém.</h1>
+    <h2>Informações</h2>
+    <p>Professor: Augusto Baia</p>
+    <p>Disciplina: Front-End Frameworks</p>
+    <p>Aluno: Kauã Rodrigues Gonzaga Taveira</p>
+    <p>Data de entrega: 26/11/2025</p>
+    <p>Tecnologias utilizadas: HTML5, CSS3, JavaScript, Bootstrap Framework.</p>
+    <p>Origem dos jogos: tetris (<a href="https://tetris.com/play-tetris" target="_blank" rel="external">https://tetris.com/play-tetris</a>), Flappy Bird (<a href="https://flappybird.io" target="_blank" rel="external">https://flappybird.io</a>), Space Invaders (<a href="https://funhtml5games.com/spaceinvaders/index.html" target="_blank" rel="external">https://funhtml5games.com/spaceinvaders/index.html</a>), Breakout (<a href="https://funhtml5games.com/breakout/index.html" target="_blank" rel="external">https://funhtml5games.com/breakout/index.html</a>).</p>
 </body>
 </html>
