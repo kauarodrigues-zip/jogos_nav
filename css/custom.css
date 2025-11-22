@@ -1,34 +1,299 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
+/* ===========================
+   FONTE RETRÔ + VARIÁVEIS
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+  --retro-bg: #050816;
+  --retro-bg-alt: #0b1020;
+  --retro-primary: #00f7ff;
+  --retro-secondary: #ff00c3;
+  --retro-accent: #ffd447;
+  --retro-text: #f5f5f5;
+  --retro-subtext: #c5c5c5;
 }
 
+/* ===========================
+   RESET BÁSICO
+   =========================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ===========================
+   FUNDO ESTILO “TELA RETRÔ”
+   =========================== */
 body {
-    background-color: rgb(38, 38, 40);
-    color: aliceblue;
-    text-align: justify;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 0 0, rgba(0, 247, 255, 0.25), transparent 55%),
+    radial-gradient(circle at 100% 0, rgba(255, 0, 195, 0.25), transparent 55%),
+    linear-gradient(180deg, var(--retro-bg) 0%, #05020a 40%, #020308 100%);
+  color: var(--retro-text);
+  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Efeito “scanline” leve na tela */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px
+  );
+  background-size: 100% 3px;
+  opacity: 0.35;
+  mix-blend-mode: soft-light;
+  z-index: -1;
+}
+
+/* ===========================
+   HEADER / NAVBAR (BOOTSTRAP)
+   =========================== */
+header.bg-primary {
+  background: linear-gradient(90deg, #050816, #111827, #1e3a8a);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+/* Ajuste de espaçamento da navbar */
+.navbar {
+  padding-block: 0.75rem;
+}
+
+/* Marca do site utilizando fonte retrô */
+.navbar-brand {
+  font-family: 'Press Start 2P', system-ui;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--retro-accent) !important;
+  text-shadow: 0 0 8px rgba(255, 212, 71, 0.7);
+}
+
+.navbar-brand:hover {
+  color: #ffffff !important;
+}
+
+/* Links do menu */
+.nav-link {
+  position: relative;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--retro-subtext) !important;
+  padding-inline: 0.9rem !important;
+}
+
+/* Efeito neon embaixo do link */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.45rem;
+  right: 0.45rem;
+  bottom: 0.35rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--retro-primary), var(--retro-secondary));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+}
+
+.nav-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(0, 247, 255, 0.7);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Botão do menu (mobile) */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-toggler-icon {
+  filter: invert(1) contrast(2); /* deixa o ícone branco */
+}
+
+/* ===========================
+   LAYOUT DO CONTEÚDO
+   =========================== */
+
+/* Caso queira envolver o conteúdo em:
+   <div class="main-content"> ... </div> nas páginas
+   isto cria uma “caixa” centralizada bonitinha.
+*/
+.main-content {
+  max-width: 1100px;
+  margin: 2.5rem auto 3rem;
+  padding: 2rem 1.5rem;
+  background:
+    radial-gradient(circle at top left, rgba(0, 247, 255, 0.12), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(255, 0, 195, 0.12), transparent 55%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(3, 7, 18, 0.96));
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+}
+
+/* Fallback para quando não usar .main-content:
+   centraliza e dá respiro no conteúdo direto no body.
+*/
+body > h1,
+body > h2,
+body > h3,
+body > p,
+body > div:not(#menu-placeholder):not(.modal) {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+body > h1 {
+  margin-top: 2.5rem;
+}
+
+/* ===========================
+   TIPOGRAFIA
+   =========================== */
+h1, h2, h3 {
+  font-family: 'Press Start 2P', system-ui;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1.25rem;
 }
 
 h1 {
-    margin-right: 80px;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  color: var(--retro-primary);
+  text-shadow: 0 0 12px rgba(0, 247, 255, 0.85);
 }
 
-hr {
-    margin-right: 80px;
+h2 {
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  color: var(--retro-accent);
+  text-shadow: 0 0 10px rgba(255, 212, 71, 0.7);
 }
 
-div.principal {
-    margin: 200px;
-}
-
-iframe.jogos {
-    width: 1250px;
-    border: 10px;
-    border-color: aliceblue;
+h3 {
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  color: var(--retro-secondary);
+  text-shadow: 0 0 10px rgba(255, 0, 195, 0.7);
 }
 
 p {
-    white-space: normal;      /* padrão – permite quebra de linha */
-    overflow-wrap: break-word; /* quebra palavras muito grandes */
-    margin-right: 200px;
+  color: var(--retro-subtext);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+}
+
+/* Links gerais */
+a {
+  color: var(--retro-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--retro-accent);
+  text-shadow: 0 0 6px rgba(0, 247, 255, 0.85);
+}
+
+/* Linha horizontal */
+hr {
+  border-color: rgba(148, 163, 184, 0.4);
+  margin-block: 1.75rem;
+}
+
+/* ===========================
+   SEÇÕES DE JOGOS / IFRAMES
+   =========================== */
+iframe {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  margin: 1.25rem auto 2.75rem;
+  border-radius: 18px;
+  border: 3px solid rgba(0, 247, 255, 0.8);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.8),
+    0 20px 45px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(0, 247, 255, 0.6);
+  background-color: #000;
+}
+
+/* Se quiser marcar cada jogo com uma classe .game-section */
+.game-section {
+  margin-bottom: 2.5rem;
+}
+
+/* ===========================
+   PÁGINA DE CONTATO / LISTAS
+   =========================== */
+.contact-links p {
+  margin-bottom: 0.4rem;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ===========================
+   RESPONSIVIDADE
+   =========================== */
+@media (max-width: 768px) {
+  .main-content {
+    margin: 1.5rem auto 2rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  iframe {
+    max-width: 100%;
+    height: 420px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  iframe {
+    height: 360px;
+  }
+
+  .navbar-brand {
+    max-width: 180px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+}
+
+/* ===========================
+   PEQUENOS AJUSTES
+   =========================== */
+#menu-placeholder {
+  margin-bottom: 0;
 }
